@@ -4,11 +4,6 @@ import './bootstrap';
 
 import keystone from 'keystone';
 
-const {
-	MONGO_URL,
-	APP_NAME,
- } = process.env;
-
 keystone.init({
 	'name': 'boilerplate-cms',
 	'brand': 'boilerplate-cms',
