@@ -1,0 +1,13 @@
+version: '2.1'
+services:
+
+  cms:
+    container_name: boilerplate-cms
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./:/app"
+    command: npm run dev
+    image:
+      rodders1991/cms:dev

@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+
+  cms:
+    container_name: boilerplate-cms
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image:
+      rodders1991/cms:dev
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    environment:
+      - APP_NAME=boilerplate-cms
+      - MONGO_URL=mongodb://mongodb/${APP_NAME}
+    command: npm start
+
+  mongodb:
+      image: mongo:latest
+      container_name: "mongodb"
+      environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      command: mongod --smallfiles --logpath=/dev/null # --quiet
