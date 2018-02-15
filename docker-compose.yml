@@ -17,7 +17,7 @@ services:
       - mongodb
     environment:
       - APP_NAME=boilerplate-cms
-      - MONGO_URL=mongodb://mongodb/${APP_NAME}
+      - MONGO_URI=mongodb://mongodb/${APP_NAME}
     command: npm start
 
   mongodb:

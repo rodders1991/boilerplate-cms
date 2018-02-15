@@ -20,7 +20,6 @@ keystone.init({
 	'view engine': 'pug',
 
 	'emails': 'templates/emails',
-	'mongo': MONGO_URL || `mongodb://localhost/${APP_NAME}`
 	'auto update': true,
 	'session': true,
 	'auth': true,
