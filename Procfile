@@ -1,1 +1,1 @@
-web: node keystone.js
+web: babel-node keystone.js
