@@ -29,6 +29,11 @@ The code was initially generated using yeoman from keystones own generator https
 - Run `npm start` or `npm run dev` if you want to watch for file changes
 
 
+## Forking this repo:
+
+- Update the image names on the docker compose files to the app name.
+- Comment out the dist file in the .gitignore file so that git can stage build code for production
+
 ### TODO
 
 - Testing environment with mocha
