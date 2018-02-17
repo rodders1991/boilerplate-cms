@@ -25,5 +25,8 @@
     "start": "node dist/keystone.js",
     "dev": "nodemon $2 --exec babel-node --inspect src/keystone.js",
     "build": "BABEL_ENV=production babel src -d dist --copy-files -s"
-  }
+  },
+  "pre-commit": [
+    "build"
+  ]
 }
