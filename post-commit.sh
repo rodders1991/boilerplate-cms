@@ -1,6 +1,6 @@
 #!/bin/sh
 echo
-if [ -a .commit ]
+if [ -e .commit ];
     then
     rm .commit
     npm run build
