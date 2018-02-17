@@ -25,12 +25,14 @@
     "lint": "eslint .",
     "start": "node dist/keystone.js",
     "dev": "nodemon $2 --exec babel-node --inspect src/keystone.js",
-    "build": "BABEL_ENV=production babel src -d dist --copy-files -s"
+    "build": "BABEL_ENV=production babel src -d dist --copy-files -s",
+    "pre-commit": "./pre-commit.sh",
+    "post-commit": "./post-commit.sh"
   },
   "pre-commit": [
-    "./pre-commit.sh"
+    "pre-commit"
   ],
   "post-commit": [
-    "./post-commit.sh"
+    "post-commit"
   ]
 }
