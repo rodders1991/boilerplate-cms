@@ -34,5 +34,8 @@
   ],
   "post-commit": [
     "post-commit"
+  ],
+  "presets": [
+    "env"
   ]
 }
