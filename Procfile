@@ -1,1 +1,1 @@
-web: babel-node keystone.js
+web: npm start
