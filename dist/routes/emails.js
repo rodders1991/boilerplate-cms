@@ -1,15 +1,9 @@
-"use strict";
-
-var _keystone = _interopRequireDefault(require("keystone"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+import keystone from 'keystone';
 module.exports = {
   /** New Enquiry Notifications */
-  'enquiry-notification': function enquiryNotification(req, res, callback) {
-    var Enquiry = _keystone.default.list('Enquiry');
-
-    var newEnquiry = new Enquiry.model({
+  'enquiry-notification': (req, res, callback) => {
+    const Enquiry = keystone.list('Enquiry');
+    const newEnquiry = new Enquiry.model({
       name: {
         first: 'Test',
         last: 'User'

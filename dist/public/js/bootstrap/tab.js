@@ -9,7 +9,7 @@
   'use strict'; // TAB CLASS DEFINITION
   // ====================
 
-  var Tab = function Tab(element) {
+  var Tab = function (element) {
     // jscs:disable requireDollarBeforejQueryAssignment
     this.element = $(element); // jscs:enable requireDollarBeforejQueryAssignment
   };
@@ -102,7 +102,7 @@
   // ============
 
 
-  var clickHandler = function clickHandler(e) {
+  var clickHandler = function (e) {
     e.preventDefault();
     Plugin.call($(this), 'show');
   };

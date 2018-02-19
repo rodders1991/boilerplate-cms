@@ -1,16 +1,11 @@
-"use strict";
-
-var _keystone = _interopRequireDefault(require("keystone"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Types = _keystone.default.Field.Types;
+import keystone from 'keystone';
+const Types = keystone.Field.Types;
 /**
  * User Model
  * ==========
  */
 
-var User = new _keystone.default.List('User');
+const User = new keystone.List('User');
 User.add({
   name: {
     type: Types.Name,

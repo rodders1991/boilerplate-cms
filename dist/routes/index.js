@@ -1,24 +1,15 @@
-"use strict";
+import keystone from 'keystone';
+import { initLocals, flashMessages } from './middleware';
+const importRoutes = keystone.importer(__dirname); // Common Middleware
 
-var _keystone = _interopRequireDefault(require("keystone"));
+keystone.pre('routes', initLocals);
+keystone.pre('render', flashMessages); // Import Route Controllers
 
-var _middleware = require("./middleware");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var importRoutes = _keystone.default.importer(__dirname); // Common Middleware
-
-
-_keystone.default.pre('routes', _middleware.initLocals);
-
-_keystone.default.pre('render', _middleware.flashMessages); // Import Route Controllers
-
-
-var routes = {
+const routes = {
   views: importRoutes('./views')
 }; // Setup Route Bindings
 
-exports = module.exports = function (app) {
+exports = module.exports = app => {
   // Views
   app.get('/', routes.views.index);
   app.all('/contact', routes.views.contact);

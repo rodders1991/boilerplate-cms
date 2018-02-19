@@ -1,5 +1,3 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.5
  * http://getbootstrap.com/javascript/#carousel
@@ -11,7 +9,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   'use strict'; // CAROUSEL CLASS DEFINITION
   // =========================
 
-  var Carousel = function Carousel(element, options) {
+  var Carousel = function (element, options) {
     this.$element = $(element);
     this.$indicators = this.$element.find('.carousel-indicators');
     this.options = options;
@@ -166,7 +164,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.carousel');
-      var options = $.extend({}, Carousel.DEFAULTS, $this.data(), _typeof(option) == 'object' && option);
+      var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option);
       var action = typeof option == 'string' ? option : options.slide;
       if (!data) $this.data('bs.carousel', data = new Carousel(this, options));
       if (typeof option == 'number') data.to(option);else if (action) data[action]();else if (options.interval) data.pause().cycle();
@@ -185,7 +183,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   // =================
 
 
-  var clickHandler = function clickHandler(e) {
+  var clickHandler = function (e) {
     var href;
     var $this = $(this);
     var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')); // strip for ie7

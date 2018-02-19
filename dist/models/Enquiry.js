@@ -1,16 +1,11 @@
-"use strict";
-
-var _keystone = _interopRequireDefault(require("keystone"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Types = _keystone.default.Field.Types;
+import keystone from 'keystone';
+const Types = keystone.Field.Types;
 /**
  * Enquiry Model
  * =============
  */
 
-var Enquiry = new _keystone.default.List('Enquiry', {
+const Enquiry = new keystone.List('Enquiry', {
   nocreate: true,
   noedit: true
 });
@@ -60,7 +55,7 @@ Enquiry.schema.post('save', function () {
 
 Enquiry.schema.methods.sendNotificationEmail = function (callback) {
   if (typeof callback !== 'function') {
-    callback = function callback(err) {
+    callback = function (err) {
       if (err) {
         console.error('There was an error sending the notification email:', err);
       }
@@ -73,12 +68,10 @@ Enquiry.schema.methods.sendNotificationEmail = function (callback) {
   }
 
   var enquiry = this;
-
-  var brand = _keystone.default.get('brand');
-
-  _keystone.default.list('User').model.find().where('isAdmin', true).exec(function (err, admins) {
+  var brand = keystone.get('brand');
+  keystone.list('User').model.find().where('isAdmin', true).exec(function (err, admins) {
     if (err) return callback(err);
-    new _keystone.default.Email({
+    new keystone.Email({
       templateName: 'enquiry-notification',
       transport: 'mailgun'
     }).send({

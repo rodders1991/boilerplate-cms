@@ -1,5 +1,3 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /* ========================================================================
  * Bootstrap: modal.js v3.3.5
  * http://getbootstrap.com/javascript/#modals
@@ -11,7 +9,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   'use strict'; // MODAL CLASS DEFINITION
   // ======================
 
-  var Modal = function Modal(element, options) {
+  var Modal = function (element, options) {
     this.options = options;
     this.$body = $(document.body);
     this.$element = $(element);
@@ -168,7 +166,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     } else if (!this.isShown && this.$backdrop) {
       this.$backdrop.removeClass('in');
 
-      var callbackRemove = function callbackRemove() {
+      var callbackRemove = function () {
         that.removeBackdrop();
         callback && callback();
       };
@@ -238,7 +236,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.modal');
-      var options = $.extend({}, Modal.DEFAULTS, $this.data(), _typeof(option) == 'object' && option);
+      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option);
       if (!data) $this.data('bs.modal', data = new Modal(this, options));
       if (typeof option == 'string') data[option](_relatedTarget);else if (options.show) data.show(_relatedTarget);
     });

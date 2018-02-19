@@ -1,5 +1,3 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /* ========================================================================
  * Bootstrap: popover.js v3.3.5
  * http://getbootstrap.com/javascript/#popovers
@@ -11,7 +9,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   'use strict'; // POPOVER PUBLIC CLASS DEFINITION
   // ===============================
 
-  var Popover = function Popover(element, options) {
+  var Popover = function (element, options) {
     this.init('popover', element, options);
   };
 
@@ -65,7 +63,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.popover');
-      var options = _typeof(option) == 'object' && option;
+      var options = typeof option == 'object' && option;
       if (!data && /destroy|hide/.test(option)) return;
       if (!data) $this.data('bs.popover', data = new Popover(this, options));
       if (typeof option == 'string') data[option]();

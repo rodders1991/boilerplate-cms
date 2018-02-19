@@ -37,7 +37,7 @@
       called = true;
     });
 
-    var callback = function callback() {
+    var callback = function () {
       if (!called) $($el).trigger($.support.transition.end);
     };
 
@@ -51,7 +51,7 @@
     $.event.special.bsTransitionEnd = {
       bindType: $.support.transition.end,
       delegateType: $.support.transition.end,
-      handle: function handle(e) {
+      handle: function (e) {
         if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments);
       }
     };

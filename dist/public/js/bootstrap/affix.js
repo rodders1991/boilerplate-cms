@@ -1,5 +1,3 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /* ========================================================================
  * Bootstrap: affix.js v3.3.5
  * http://getbootstrap.com/javascript/#affix
@@ -11,7 +9,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   'use strict'; // AFFIX CLASS DEFINITION
   // ======================
 
-  var Affix = function Affix(element, options) {
+  var Affix = function (element, options) {
     this.options = $.extend({}, Affix.DEFAULTS, options);
     this.$target = $(this.options.target).on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this)).on('click.bs.affix.data-api', $.proxy(this.checkPositionWithEventLoop, this));
     this.$element = $(element);
@@ -66,7 +64,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var offsetTop = offset.top;
     var offsetBottom = offset.bottom;
     var scrollHeight = Math.max($(document).height(), $(document.body).height());
-    if (_typeof(offset) != 'object') offsetBottom = offsetTop = offset;
+    if (typeof offset != 'object') offsetBottom = offsetTop = offset;
     if (typeof offsetTop == 'function') offsetTop = offset.top(this.$element);
     if (typeof offsetBottom == 'function') offsetBottom = offset.bottom(this.$element);
     var affix = this.getState(scrollHeight, height, offsetTop, offsetBottom);
@@ -95,7 +93,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.affix');
-      var options = _typeof(option) == 'object' && option;
+      var options = typeof option == 'object' && option;
       if (!data) $this.data('bs.affix', data = new Affix(this, options));
       if (typeof option == 'string') data[option]();
     });

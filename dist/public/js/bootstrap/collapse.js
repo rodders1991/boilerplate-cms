@@ -1,5 +1,3 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.5
  * http://getbootstrap.com/javascript/#collapse
@@ -11,7 +9,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   'use strict'; // COLLAPSE PUBLIC CLASS DEFINITION
   // ================================
 
-  var Collapse = function Collapse(element, options) {
+  var Collapse = function (element, options) {
     this.$element = $(element);
     this.options = $.extend({}, Collapse.DEFAULTS, options);
     this.$trigger = $('[data-toggle="collapse"][href="#' + element.id + '"],' + '[data-toggle="collapse"][data-target="#' + element.id + '"]');
@@ -61,7 +59,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     this.$trigger.removeClass('collapsed').attr('aria-expanded', true);
     this.transitioning = 1;
 
-    var complete = function complete() {
+    var complete = function () {
       this.$element.removeClass('collapsing').addClass('collapse in')[dimension]('');
       this.transitioning = 0;
       this.$element.trigger('shown.bs.collapse');
@@ -83,7 +81,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     this.$trigger.addClass('collapsed').attr('aria-expanded', false);
     this.transitioning = 1;
 
-    var complete = function complete() {
+    var complete = function () {
       this.transitioning = 0;
       this.$element.removeClass('collapsing').addClass('collapse').trigger('hidden.bs.collapse');
     };
@@ -122,7 +120,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.collapse');
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), _typeof(option) == 'object' && option);
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option);
       if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false;
       if (!data) $this.data('bs.collapse', data = new Collapse(this, options));
       if (typeof option == 'string') data[option]();
