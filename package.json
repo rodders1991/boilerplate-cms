@@ -36,8 +36,5 @@
   ],
   "post-commit": [
     "post-commit"
-  ],
-  "presets": [
-    "@babel/preset-env"
   ]
 }
