@@ -1,3 +1,5 @@
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.5
  * http://getbootstrap.com/javascript/#scrollspy
@@ -108,7 +110,7 @@
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.scrollspy');
-      var options = typeof option == 'object' && option;
+      var options = _typeof(option) == 'object' && option;
       if (!data) $this.data('bs.scrollspy', data = new ScrollSpy(this, options));
       if (typeof option == 'string') data[option]();
     });

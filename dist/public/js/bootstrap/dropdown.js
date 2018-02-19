@@ -12,7 +12,7 @@
   var backdrop = '.dropdown-backdrop';
   var toggle = '[data-toggle="dropdown"]';
 
-  var Dropdown = function (element) {
+  var Dropdown = function Dropdown(element) {
     $(element).on('click.bs.dropdown', this.toggle);
   };
 

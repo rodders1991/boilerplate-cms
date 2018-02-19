@@ -1,3 +1,5 @@
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /* ========================================================================
  * Bootstrap: button.js v3.3.5
  * http://getbootstrap.com/javascript/#buttons
@@ -9,7 +11,7 @@
   'use strict'; // BUTTON PUBLIC CLASS DEFINITION
   // ==============================
 
-  var Button = function (element, options) {
+  var Button = function Button(element, options) {
     this.$element = $(element);
     this.options = $.extend({}, Button.DEFAULTS, options);
     this.isLoading = false;
@@ -71,7 +73,7 @@
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.button');
-      var options = typeof option == 'object' && option;
+      var options = _typeof(option) == 'object' && option;
       if (!data) $this.data('bs.button', data = new Button(this, options));
       if (option == 'toggle') data.toggle();else if (option) data.setState(option);
     });

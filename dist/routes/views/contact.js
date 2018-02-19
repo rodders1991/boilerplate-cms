@@ -1,8 +1,13 @@
-import keystone from 'keystone';
-const Enquiry = keystone.list('Enquiry');
+"use strict";
 
-exports = module.exports = (req, res) => {
-  var view = new keystone.View(req, res);
+var _keystone = _interopRequireDefault(require("keystone"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Enquiry = _keystone.default.list('Enquiry');
+
+exports = module.exports = function (req, res) {
+  var view = new _keystone.default.View(req, res);
   var locals = res.locals; // Set locals
 
   locals.section = 'contact';
@@ -13,7 +18,7 @@ exports = module.exports = (req, res) => {
 
   view.on('post', {
     action: 'contact'
-  }, next => {
+  }, function (next) {
     var newEnquiry = new Enquiry.model();
     var updater = newEnquiry.getUpdateHandler(req);
     updater.process(req.body, {

@@ -12,6 +12,9 @@
     "node-sass-middleware": "0.11.0",
     "post-commit": "^0.0.1",
     "pre-commit": "^1.2.2",
+    "@babel/cli": "^7.0.0-beta.35",
+    "@babel/core": "^7.0.0-beta.35",
+    "@babel/preset-env": "^7.0.0-beta.35",
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
@@ -36,5 +39,8 @@
   ],
   "post-commit": [
     "post-commit"
+  ],
+  "presets": [
+    "@babel/preset-env"
   ]
 }

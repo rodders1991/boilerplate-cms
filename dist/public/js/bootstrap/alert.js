@@ -11,7 +11,7 @@
 
   var dismiss = '[data-dismiss="alert"]';
 
-  var Alert = function (el) {
+  var Alert = function Alert(el) {
     $(el).on('click', dismiss, this.close);
   };
 

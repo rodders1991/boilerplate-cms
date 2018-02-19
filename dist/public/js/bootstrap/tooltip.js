@@ -1,3 +1,5 @@
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.5
  * http://getbootstrap.com/javascript/#tooltip
@@ -10,7 +12,7 @@
   'use strict'; // TOOLTIP PUBLIC CLASS DEFINITION
   // ===============================
 
-  var Tooltip = function (element, options) {
+  var Tooltip = function Tooltip(element, options) {
     this.type = null;
     this.options = null;
     this.enabled = null;
@@ -195,7 +197,7 @@
       var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight);
       this.applyPlacement(calculatedOffset, placement);
 
-      var complete = function () {
+      var complete = function complete() {
         var prevHoverState = that.hoverState;
         that.$element.trigger('shown.bs.' + that.type);
         that.hoverState = null;
@@ -221,7 +223,7 @@
     // so we use setOffset directly with our own function B-0
 
     $.offset.setOffset($tip[0], $.extend({
-      using: function (props) {
+      using: function using(props) {
         $tip.css({
           top: Math.round(props.top),
           left: Math.round(props.left)
@@ -379,7 +381,9 @@
   };
 
   Tooltip.prototype.getUID = function (prefix) {
-    do prefix += ~~(Math.random() * 1000000); while (document.getElementById(prefix));
+    do {
+      prefix += ~~(Math.random() * 1000000);
+    } while (document.getElementById(prefix));
 
     return prefix;
   };
@@ -454,7 +458,7 @@
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.tooltip');
-      var options = typeof option == 'object' && option;
+      var options = _typeof(option) == 'object' && option;
       if (!data && /destroy|hide/.test(option)) return;
       if (!data) $this.data('bs.tooltip', data = new Tooltip(this, options));
       if (typeof option == 'string') data[option]();
