@@ -1,3 +1,5 @@
+'use strict';
+
 /* ========================================================================
  * Bootstrap: tab.js v3.3.5
  * http://getbootstrap.com/javascript/#tabs
@@ -5,16 +7,21 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
+
 +function ($) {
-  'use strict'; // TAB CLASS DEFINITION
+  'use strict';
+
+  // TAB CLASS DEFINITION
   // ====================
 
   var Tab = function Tab(element) {
     // jscs:disable requireDollarBeforejQueryAssignment
-    this.element = $(element); // jscs:enable requireDollarBeforejQueryAssignment
+    this.element = $(element);
+    // jscs:enable requireDollarBeforejQueryAssignment
   };
 
   Tab.VERSION = '3.3.5';
+
   Tab.TRANSITION_DURATION = 150;
 
   Tab.prototype.show = function () {
@@ -28,6 +35,7 @@
     }
 
     if ($this.parent('li').hasClass('active')) return;
+
     var $previous = $ul.find('.active:last a');
     var hideEvent = $.Event('hide.bs.tab', {
       relatedTarget: $this[0]
@@ -35,10 +43,14 @@
     var showEvent = $.Event('show.bs.tab', {
       relatedTarget: $previous[0]
     });
+
     $previous.trigger(hideEvent);
     $this.trigger(showEvent);
+
     if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return;
+
     var $target = $(selector);
+
     this.activate($this.closest('li'), $ul);
     this.activate($target, $target.parent(), function () {
       $previous.trigger({
@@ -58,11 +70,11 @@
 
     function next() {
       $active.removeClass('active').find('> .dropdown-menu > .active').removeClass('active').end().find('[data-toggle="tab"]').attr('aria-expanded', false);
+
       element.addClass('active').find('[data-toggle="tab"]').attr('aria-expanded', true);
 
       if (transition) {
         element[0].offsetWidth; // reflow for transition
-
         element.addClass('in');
       } else {
         element.removeClass('fade');
@@ -76,31 +88,38 @@
     }
 
     $active.length && transition ? $active.one('bsTransitionEnd', next).emulateTransitionEnd(Tab.TRANSITION_DURATION) : next();
-    $active.removeClass('in');
-  }; // TAB PLUGIN DEFINITION
-  // =====================
 
+    $active.removeClass('in');
+  };
+
+  // TAB PLUGIN DEFINITION
+  // =====================
 
   function Plugin(option) {
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.tab');
+
       if (!data) $this.data('bs.tab', data = new Tab(this));
       if (typeof option == 'string') data[option]();
     });
   }
 
   var old = $.fn.tab;
+
   $.fn.tab = Plugin;
-  $.fn.tab.Constructor = Tab; // TAB NO CONFLICT
+  $.fn.tab.Constructor = Tab;
+
+  // TAB NO CONFLICT
   // ===============
 
   $.fn.tab.noConflict = function () {
     $.fn.tab = old;
     return this;
-  }; // TAB DATA-API
-  // ============
+  };
 
+  // TAB DATA-API
+  // ============
 
   var clickHandler = function clickHandler(e) {
     e.preventDefault();

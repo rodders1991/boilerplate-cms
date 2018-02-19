@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/bootstrap.js"],"names":["require","load"],"mappings":"AAAAA,QAAQ,QAAR,EAAkBC,IAAlB","file":"bootstrap.js","sourcesContent":["require('dotenv').load();\n"]}
+{"version":3,"sources":["../src/bootstrap.js"],"names":["require","load"],"mappings":";;AAAAA,QAAQ,QAAR,EAAkBC,IAAlB","file":"bootstrap.js","sourcesContent":["require('dotenv').load();\n"]}

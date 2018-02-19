@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * This script automatically creates a default Admin user when an
  * empty database is used for the first time. You can use this
@@ -6,15 +8,11 @@
  * Alternatively, you can export a custom function for the update:
  * module.exports = function(done) { ... }
  */
+
 exports.create = {
-  User: [{
-    'name.first': 'Admin',
-    'name.last': 'User',
-    'email': 'user@keystonejs.com',
-    'password': 'admin',
-    'isAdmin': true
-  }]
+	User: [{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'user@keystonejs.com', 'password': 'admin', 'isAdmin': true }]
 };
+
 /*
 
 // This is the long-hand version of the functionality above:

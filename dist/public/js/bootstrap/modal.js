@@ -1,4 +1,6 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
  * Bootstrap: modal.js v3.3.5
@@ -7,8 +9,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
+
 +function ($) {
-  'use strict'; // MODAL CLASS DEFINITION
+  'use strict';
+
+  // MODAL CLASS DEFINITION
   // ======================
 
   var Modal = function Modal(element, options) {
@@ -30,8 +35,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   };
 
   Modal.VERSION = '3.3.5';
+
   Modal.TRANSITION_DURATION = 300;
   Modal.BACKDROP_TRANSITION_DURATION = 150;
+
   Modal.DEFAULTS = {
     backdrop: true,
     keyboard: true,
@@ -44,23 +51,29 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   Modal.prototype.show = function (_relatedTarget) {
     var that = this;
-    var e = $.Event('show.bs.modal', {
-      relatedTarget: _relatedTarget
-    });
+    var e = $.Event('show.bs.modal', { relatedTarget: _relatedTarget });
+
     this.$element.trigger(e);
+
     if (this.isShown || e.isDefaultPrevented()) return;
+
     this.isShown = true;
+
     this.checkScrollbar();
     this.setScrollbar();
     this.$body.addClass('modal-open');
+
     this.escape();
     this.resize();
+
     this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this));
+
     this.$dialog.on('mousedown.dismiss.bs.modal', function () {
       that.$element.one('mouseup.dismiss.bs.modal', function (e) {
         if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true;
       });
     });
+
     this.backdrop(function () {
       var transition = $.support.transition && that.$element.hasClass('fade');
 
@@ -69,6 +82,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
 
       that.$element.show().scrollTop(0);
+
       that.adjustDialog();
 
       if (transition) {
@@ -76,10 +90,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
 
       that.$element.addClass('in');
+
       that.enforceFocus();
-      var e = $.Event('shown.bs.modal', {
-        relatedTarget: _relatedTarget
-      });
+
+      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget });
+
       transition ? that.$dialog // wait for modal to slide in
       .one('bsTransitionEnd', function () {
         that.$element.trigger('focus').trigger(e);
@@ -89,15 +104,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   Modal.prototype.hide = function (e) {
     if (e) e.preventDefault();
+
     e = $.Event('hide.bs.modal');
+
     this.$element.trigger(e);
+
     if (!this.isShown || e.isDefaultPrevented()) return;
+
     this.isShown = false;
+
     this.escape();
     this.resize();
+
     $(document).off('focusin.bs.modal');
+
     this.$element.removeClass('in').off('click.dismiss.bs.modal').off('mouseup.dismiss.bs.modal');
+
     this.$dialog.off('mousedown.dismiss.bs.modal');
+
     $.support.transition && this.$element.hasClass('fade') ? this.$element.one('bsTransitionEnd', $.proxy(this.hideModal, this)).emulateTransitionEnd(Modal.TRANSITION_DURATION) : this.hideModal();
   };
 
@@ -150,20 +174,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
     if (this.isShown && this.options.backdrop) {
       var doAnimate = $.support.transition && animate;
+
       this.$backdrop = $(document.createElement('div')).addClass('modal-backdrop ' + animate).appendTo(this.$body);
+
       this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
         if (this.ignoreBackdropClick) {
           this.ignoreBackdropClick = false;
           return;
         }
-
         if (e.target !== e.currentTarget) return;
         this.options.backdrop == 'static' ? this.$element[0].focus() : this.hide();
       }, this));
+
       if (doAnimate) this.$backdrop[0].offsetWidth; // force reflow
 
       this.$backdrop.addClass('in');
+
       if (!callback) return;
+
       doAnimate ? this.$backdrop.one('bsTransitionEnd', callback).emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) : callback();
     } else if (!this.isShown && this.$backdrop) {
       this.$backdrop.removeClass('in');
@@ -172,13 +200,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         that.removeBackdrop();
         callback && callback();
       };
-
       $.support.transition && this.$element.hasClass('fade') ? this.$backdrop.one('bsTransitionEnd', callbackRemove).emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) : callbackRemove();
     } else if (callback) {
       callback();
     }
-  }; // these following methods are used to handle overflowing modals
+  };
 
+  // these following methods are used to handle overflowing modals
 
   Modal.prototype.handleUpdate = function () {
     this.adjustDialog();
@@ -186,6 +214,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   Modal.prototype.adjustDialog = function () {
     var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight;
+
     this.$element.css({
       paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
       paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
@@ -201,13 +230,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   Modal.prototype.checkScrollbar = function () {
     var fullWindowWidth = window.innerWidth;
-
     if (!fullWindowWidth) {
       // workaround for missing window.innerWidth in IE8
       var documentElementRect = document.documentElement.getBoundingClientRect();
       fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
     }
-
     this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
     this.scrollbarWidth = this.measureScrollbar();
   };
@@ -230,44 +257,48 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     this.$body[0].removeChild(scrollDiv);
     return scrollbarWidth;
-  }; // MODAL PLUGIN DEFINITION
-  // =======================
+  };
 
+  // MODAL PLUGIN DEFINITION
+  // =======================
 
   function Plugin(option, _relatedTarget) {
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.modal');
-      var options = $.extend({}, Modal.DEFAULTS, $this.data(), _typeof(option) == 'object' && option);
+      var options = $.extend({}, Modal.DEFAULTS, $this.data(), (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option);
+
       if (!data) $this.data('bs.modal', data = new Modal(this, options));
       if (typeof option == 'string') data[option](_relatedTarget);else if (options.show) data.show(_relatedTarget);
     });
   }
 
   var old = $.fn.modal;
+
   $.fn.modal = Plugin;
-  $.fn.modal.Constructor = Modal; // MODAL NO CONFLICT
+  $.fn.modal.Constructor = Modal;
+
+  // MODAL NO CONFLICT
   // =================
 
   $.fn.modal.noConflict = function () {
     $.fn.modal = old;
     return this;
-  }; // MODAL DATA-API
-  // ==============
+  };
 
+  // MODAL DATA-API
+  // ==============
 
   $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
     var $this = $(this);
     var href = $this.attr('href');
     var $target = $($this.attr('data-target') || href && href.replace(/.*(?=#[^\s]+$)/, '')); // strip for ie7
+    var option = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data());
 
-    var option = $target.data('bs.modal') ? 'toggle' : $.extend({
-      remote: !/#/.test(href) && href
-    }, $target.data(), $this.data());
     if ($this.is('a')) e.preventDefault();
+
     $target.one('show.bs.modal', function (showEvent) {
       if (showEvent.isDefaultPrevented()) return; // only register focus restorer if modal will actually get shown
-
       $target.one('hidden.bs.modal', function () {
         $this.is(':visible') && $this.trigger('focus');
       });

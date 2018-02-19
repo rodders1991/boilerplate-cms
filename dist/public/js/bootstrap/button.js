@@ -1,4 +1,6 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
  * Bootstrap: button.js v3.3.5
@@ -7,8 +9,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
+
 +function ($) {
-  'use strict'; // BUTTON PUBLIC CLASS DEFINITION
+  'use strict';
+
+  // BUTTON PUBLIC CLASS DEFINITION
   // ==============================
 
   var Button = function Button(element, options) {
@@ -18,6 +23,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   };
 
   Button.VERSION = '3.3.5';
+
   Button.DEFAULTS = {
     loadingText: 'loading...'
   };
@@ -27,9 +33,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var $el = this.$element;
     var val = $el.is('input') ? 'val' : 'html';
     var data = $el.data();
-    state += 'Text';
-    if (data.resetText == null) $el.data('resetText', $el[val]()); // push to event loop to allow forms to submit
 
+    state += 'Text';
+
+    if (data.resetText == null) $el.data('resetText', $el[val]());
+
+    // push to event loop to allow forms to submit
     setTimeout($.proxy(function () {
       $el[val](data[state] == null ? this.options[state] : data[state]);
 
@@ -49,7 +58,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
     if ($parent.length) {
       var $input = this.$element.find('input');
-
       if ($input.prop('type') == 'radio') {
         if ($input.prop('checked')) changed = false;
         $parent.find('.active').removeClass('active');
@@ -58,38 +66,44 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if ($input.prop('checked') !== this.$element.hasClass('active')) changed = false;
         this.$element.toggleClass('active');
       }
-
       $input.prop('checked', this.$element.hasClass('active'));
       if (changed) $input.trigger('change');
     } else {
       this.$element.attr('aria-pressed', !this.$element.hasClass('active'));
       this.$element.toggleClass('active');
     }
-  }; // BUTTON PLUGIN DEFINITION
-  // ========================
+  };
 
+  // BUTTON PLUGIN DEFINITION
+  // ========================
 
   function Plugin(option) {
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.button');
-      var options = _typeof(option) == 'object' && option;
+      var options = (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option;
+
       if (!data) $this.data('bs.button', data = new Button(this, options));
+
       if (option == 'toggle') data.toggle();else if (option) data.setState(option);
     });
   }
 
   var old = $.fn.button;
+
   $.fn.button = Plugin;
-  $.fn.button.Constructor = Button; // BUTTON NO CONFLICT
+  $.fn.button.Constructor = Button;
+
+  // BUTTON NO CONFLICT
   // ==================
 
   $.fn.button.noConflict = function () {
     $.fn.button = old;
     return this;
-  }; // BUTTON DATA-API
-  // ===============
+  };
 
+  // BUTTON DATA-API
+  // ===============
 
   $(document).on('click.bs.button.data-api', '[data-toggle^="button"]', function (e) {
     var $btn = $(e.target);

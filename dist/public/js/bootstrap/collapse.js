@@ -1,4 +1,6 @@
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.5
@@ -7,8 +9,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
+
 +function ($) {
-  'use strict'; // COLLAPSE PUBLIC CLASS DEFINITION
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
   // ================================
 
   var Collapse = function Collapse(element, options) {
@@ -27,7 +32,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   };
 
   Collapse.VERSION = '3.3.5';
+
   Collapse.TRANSITION_DURATION = 350;
+
   Collapse.DEFAULTS = {
     toggle: true
   };
@@ -39,6 +46,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   Collapse.prototype.show = function () {
     if (this.transitioning || this.$element.hasClass('in')) return;
+
     var activesData;
     var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing');
 
@@ -57,8 +65,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
 
     var dimension = this.dimension();
+
     this.$element.removeClass('collapse').addClass('collapsing')[dimension](0).attr('aria-expanded', true);
+
     this.$trigger.removeClass('collapsed').attr('aria-expanded', true);
+
     this.transitioning = 1;
 
     var complete = function complete() {
@@ -68,19 +79,27 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     };
 
     if (!$.support.transition) return complete.call(this);
+
     var scrollSize = $.camelCase(['scroll', dimension].join('-'));
+
     this.$element.one('bsTransitionEnd', $.proxy(complete, this)).emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize]);
   };
 
   Collapse.prototype.hide = function () {
     if (this.transitioning || !this.$element.hasClass('in')) return;
+
     var startEvent = $.Event('hide.bs.collapse');
     this.$element.trigger(startEvent);
     if (startEvent.isDefaultPrevented()) return;
+
     var dimension = this.dimension();
+
     this.$element[dimension](this.$element[dimension]())[0].offsetHeight;
+
     this.$element.addClass('collapsing').removeClass('collapse in').attr('aria-expanded', false);
+
     this.$trigger.addClass('collapsed').attr('aria-expanded', false);
+
     this.transitioning = 1;
 
     var complete = function complete() {
@@ -89,6 +108,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     };
 
     if (!$.support.transition) return complete.call(this);
+
     this.$element[dimension](0).one('bsTransitionEnd', $.proxy(complete, this)).emulateTransitionEnd(Collapse.TRANSITION_DURATION);
   };
 
@@ -105,6 +125,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
     var isOpen = $element.hasClass('in');
+
     $element.attr('aria-expanded', isOpen);
     $trigger.toggleClass('collapsed', !isOpen).attr('aria-expanded', isOpen);
   };
@@ -114,15 +135,17 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var target = $trigger.attr('data-target') || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, ''); // strip for ie7
 
     return $(target);
-  } // COLLAPSE PLUGIN DEFINITION
-  // ==========================
+  }
 
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
 
   function Plugin(option) {
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.collapse');
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), _typeof(option) == 'object' && option);
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option);
+
       if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false;
       if (!data) $this.data('bs.collapse', data = new Collapse(this, options));
       if (typeof option == 'string') data[option]();
@@ -130,23 +153,30 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   }
 
   var old = $.fn.collapse;
+
   $.fn.collapse = Plugin;
-  $.fn.collapse.Constructor = Collapse; // COLLAPSE NO CONFLICT
+  $.fn.collapse.Constructor = Collapse;
+
+  // COLLAPSE NO CONFLICT
   // ====================
 
   $.fn.collapse.noConflict = function () {
     $.fn.collapse = old;
     return this;
-  }; // COLLAPSE DATA-API
-  // =================
+  };
 
+  // COLLAPSE DATA-API
+  // =================
 
   $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
     var $this = $(this);
+
     if (!$this.attr('data-target')) e.preventDefault();
+
     var $target = getTargetFromTrigger($this);
     var data = $target.data('bs.collapse');
     var option = data ? 'toggle' : $this.data();
+
     Plugin.call($target, option);
   });
 }(jQuery);
