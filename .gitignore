@@ -31,7 +31,7 @@ node_modules
 .DS_Store
 
 # Ignore build files
-# dist
+dist
 
 # Ignore pre commit hook
 .commit
